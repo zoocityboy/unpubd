@@ -10,20 +10,20 @@ volumes:
 services:
   mongodb:
     container_name: mongo
-    image: mongo:5.0.13
+    image: mongo:latest
     restart: on-failure
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
       MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE}
     volumes:
-      - mongodata:/data/db 
-      - #PATH_TO_INITDB#:/docker-entrypoint-initdb.d/
+      - mongodata:/data/db
+      # -  PATH_TO_INITDB#:/docker-entrypoint-initdb.d/
     networks:
       - unpubd
-# use if we need to connect directly to Mongo from host. ONLY FOR TESTING
-#    ports:
-#      - 27017:27017      
+    # use if we need to connect directly to Mongo from host. ONLY FOR TESTING
+    #    ports:
+    #      - 27017:27017      
 
     logging:
       driver: "local"
@@ -49,6 +49,4 @@ services:
     ports:
       - ${UNPUBD_PORT}:${UNPUBD_PORT}
     logging:
-      driver: "local"      
-
-      
+      driver: "local"
